@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Text;
 
 namespace FlightReservation
 {
     internal class FlightManager
     {
-        static List<Flight> flights = new List<Flight>();
-       static List<Passenger> passengers = new List<Passenger>();
+        public List<Flight> flights = new List<Flight>();
+        public List<Booking> bookings = new List<Booking>();
 
+        public int FlightIDCounter = 101;
+        
+
+        // public List<Passenger> passengers = new List<Passenger>();
         // Add Flight
         public void AddFlight()
         {
             try
             {
-                Console.Write("Flight ID: ");
-                int id = Convert.ToInt32(Console.ReadLine());
+                /*Console.Write("Flight ID: ");
+                int id = Convert.ToInt32(Console.ReadLine());*/
+
+                Console.Write("Flight No.: ");
+                string flightNo = Console.ReadLine();
 
                 Console.Write("From: ");
                 string from = Console.ReadLine();
@@ -29,15 +37,22 @@ namespace FlightReservation
                 Console.Write("Price: ");
                 double price = Convert.ToDouble(Console.ReadLine());
 
+                Console.Write("Date: ");
+                DateOnly date = DateOnly.Parse(Console.ReadLine());
+
+                Console.Write("Time: ");
+                TimeOnly time = TimeOnly.Parse(Console.ReadLine());
+
                 flights.Add(new Flight
                 {
-                    FlightId = id,
+                    FlightId = FlightIDCounter++,
+                    FlightNumber = flightNo,
                     From = from,
                     To = to,
                     Seats = seats,
-                    Price = price
-                    
-
+                    Price = price,
+                    Date = date,
+                    Time = time
                 });
 
                 Console.WriteLine("Flight added successfully!");
@@ -48,17 +63,7 @@ namespace FlightReservation
             }
         }
 
-        // View All Flights
-        public void ViewAllFlights()
-        {
-            foreach (Flight flight in flights)
-            {
-                Console.WriteLine($"{flight.FlightId} | {flight.From} to {flight.To} | Price: {flight.Price} | Seats: {flight.Seats}");
-            }
-
-        }
-
-        // Search Flights
+        // Search Flight
         public void SearchFlight()
         {
             Console.Write("Enter Flight ID: ");
@@ -68,7 +73,7 @@ namespace FlightReservation
 
             if (flight != null)
             {
-                Console.WriteLine($"{flight.FlightId} | {flight.From} to {flight.To} | Price: {flight.Price} | Seats: {flight.Seats} ");
+                Console.WriteLine($"Flight ID: {flight.FlightId} | Flight No.: {flight.FlightNumber} | {flight.From} to {flight.To} | Price: {flight.Price} | Seats: {flight.Seats} | Date: {flight.Date} | Time: {flight.Time}");
             }
             else
             {
@@ -76,6 +81,20 @@ namespace FlightReservation
             }
         }
 
+        //  View All Booking
+        public void ViewBookings()
+        {
+            if (bookings.Count == 0)
+            {
+                Console.WriteLine("No bookings available.");
+                return;
+            }
+
+            foreach (var b in bookings)
+            {
+                Console.WriteLine($"Booking ID: {b.BookingId} | Flight ID: {b.FlightId} | Flight No.: {b.FlightNumber} | Passenger: {b.PassengerName} | PassportNumber: {b.PassportNumber} | from {b.From} to {b.To} | Price: {b.Price}| Date: {b.Date} | Time: {b.Time}");
+            }
+        }
 
         // Manage Flight (Update) 
         public void ManageFlight()
@@ -104,7 +123,7 @@ namespace FlightReservation
         // Remove Flight
         public void RemoveFlight()
         {
-            Console.WriteLine("\nRemove an Existing Flight");
+            Console.WriteLine("Remove an Existing Flight");
             Console.WriteLine("*************************************");
 
             Console.Write("Enter Flight ID to Remove: ");
@@ -125,15 +144,22 @@ namespace FlightReservation
                 Console.WriteLine("Flight not found!");
             }
 
-            Console.WriteLine("\nUpdated Flight List:");
+            Console.WriteLine("Updated Flight List:");
 
             foreach (Flight flight in flights)
             {
-                Console.WriteLine($"{flight.FlightId} | {flight.From} to {flight.To} | Price: {flight.Price} | Seats: {flight.Seats}");
+                Console.WriteLine($"Flight ID: {flight.FlightId} | Flight No.: {flight.FlightNumber} | {flight.From} to {flight.To} | Price: {flight.Price} | Seats: {flight.Seats} | Date: {flight.Date} | Time: {flight.Time}");
             }
         }
 
-        
+        public void ViewAllFlights() 
+        {
+            foreach (Flight flight in flights)
+            {
+                Console.WriteLine($"Flight ID: {flight.FlightId} | Flight No.: {flight.FlightNumber} | {flight.From} to {flight.To} | Price: {flight.Price} | Seats: {flight.Seats} |  Date: {flight.Date} | Time: {flight.Time}");
+            }
+
+        }      
     }
 }
 
