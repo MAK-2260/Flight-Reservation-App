@@ -1,9 +1,12 @@
-﻿using System;
+﻿
+// Original implementation by Abhay Kholsa, with modifications by Asif Khan
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace FlightReservation
 {
+// Class representing a flight booking, storing all booking details
     internal class Booking
     {
         public int BookingId { get; set; }
@@ -17,5 +20,6 @@ namespace FlightReservation
         public string FlightNumber {  get; set; }
         public DateOnly Date { get; set; }
         public TimeOnly Time { get; set; }
-    }
-}
+    
+    } // End Class Booking
+} // End Namespace

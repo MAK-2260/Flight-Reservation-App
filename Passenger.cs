@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+// Abhay Khosla
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,8 +9,10 @@ namespace FlightReservation
 {
     internal class Passenger
     {
+        // List to store all passengers
         public List<Passenger> passengers = new List<Passenger>();
 
+        // Counters used to generate unique IDs for passengers and bookings
         int passengerCounter = 1;
         int bookingCounter = 1;
 
@@ -17,10 +22,10 @@ namespace FlightReservation
         public string? PassportNumber { get; private set; }
 
 
-        // SignUp
-        public void Signup()
+        // Passenger SignUp
+        public void Signup() // Deep Patel
         {
-            Console.WriteLine("-------------------PASSENGER SIGNUP------------------------");
+            Console.WriteLine("\n===== PASSENGER SIGNUP =====");
 
             Console.Write("Username: ");
             string username = Console.ReadLine();
@@ -40,12 +45,12 @@ namespace FlightReservation
             });
 
             Console.WriteLine("Signup successful!");
-        }
+        } // End Passenger Signup
 
-        // Login
-        public Passenger Login()
+        // Passenger Login
+        public Passenger Login() // Deep Patel
         {
-            Console.WriteLine("------------------------PASSENGER LOGIN------------------------");
+            Console.WriteLine("\n===== PASSENGER LOGIN =====");
 
             Console.Write("Username: ");
             string username = Console.ReadLine();
@@ -65,14 +70,15 @@ namespace FlightReservation
 
             Console.WriteLine("Invalid credentials!");
             return null;
-        }
+        } // End Passenger Login
 
-        // Book Flight
+        // Book Flight 
+        // Original implementation by Abhay Kholsa, with modifications by Asif Khan
         public void BookFlight(Passenger passenger, FlightManager manager)
         {
             manager.ViewAllFlights();
 
-            Console.Write("Enter Flight ID to Book: ");
+            Console.Write("\nEnter Flight ID to Book: ");
             int id = Convert.ToInt32(Console.ReadLine());
 
             var flight = manager.flights.FirstOrDefault(f => f.FlightId == id);
@@ -107,9 +113,9 @@ namespace FlightReservation
             });
 
             Console.WriteLine("Flight booked successfully!");
-        }
+        } // End Book Flight
 
-        // View Booking
+        // View My Booking
         public void ViewMyBookings(Passenger passenger, FlightManager manager)
         {
             var bookings = manager.bookings.Where(b => b.PassengerName == passenger.Username && b.PassportNumber == passenger.PassportNumber);
@@ -124,13 +130,14 @@ namespace FlightReservation
             {
                 Console.WriteLine($"Booking ID: {booking.BookingId} | Flight ID: {booking.FlightId} | Flight No.: {booking.FlightNumber} | from {booking.From} to {booking.To} | Price: {booking.Price} | Date: {booking.Date} | Time: {booking.Time}"); 
             }
-        }
+        } // End View My Booking
+
 
         // Cancel Booking
         public void CancelBooking(Passenger passenger, FlightManager manager)
         {
-            Console.WriteLine("Cancel an Existing Booking");
-            Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine("\nCancel an Existing Booking");
+            Console.WriteLine("-----------------------------");
 
             Console.Write("Enter Booking ID to Cancel: ");
             int bookingIdRemove = Convert.ToInt32(Console.ReadLine());
@@ -158,7 +165,7 @@ namespace FlightReservation
                 Console.WriteLine("Booking not found!");
             }
 
-            Console.WriteLine("Updated Booking List:");
+            Console.WriteLine("\nUpdated Booking List:");
 
             foreach (Booking booking in manager.bookings)
             {
@@ -167,6 +174,7 @@ namespace FlightReservation
                     Console.WriteLine($"Booking ID: {booking.BookingId} | Flight ID: {booking.FlightId}");
                 }
             }
-        }
-    }
-}
+        } // End Cancel Booking
+    
+    } // End Class Passenger
+} // End Namespace

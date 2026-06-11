@@ -1,26 +1,34 @@
-﻿namespace FlightReservation
+﻿
+
+// Asif Khan
+
+namespace FlightReservation
 {
     internal class Program
     {
-        private static string? userChoice;
+        private static string? userChoice; // declare string for user choice if they want continue or not
 
         //static List<FlightManager> manager = new List<FlightManager>();
         // FlightManager manager = new FlightManager();
         static void Main(string[] args)
         {
-            AdminDashboard admin = new AdminDashboard
+            // Username and password for admin login
+            AdminDashboard admin = new AdminDashboard // Deep Patel
             {
                 Username = "admin",
                 Password = "admin123"
             };
-
+            // Flight Management System
             FlightManager flightManager = new FlightManager();
+            // Passenger Details
             Passenger passengers = new Passenger();
+            // Passenger Interface Dashboard
             PassengerDashboard passengerDashboard = new PassengerDashboard();
 
+            // Main Dashboard Display
                 while (true)
                 {
-                    Console.WriteLine("\n--------------- FLIGHT RESERVATION App -------------");
+                    Console.WriteLine("--------------- FLIGHT RESERVATION App -------------");
                     Console.WriteLine("====================================================\n");
                     Console.WriteLine("1. Admin Login");
                     Console.WriteLine("2. Signup : Passenger");
@@ -29,7 +37,7 @@
                     Console.WriteLine("\n----------------------------------------------------");
 
                 Console.Write("\nChoose Option: ");
-                    string choice = Console.ReadLine();
+                string choice = Console.ReadLine();
 
                     switch (choice)
                     {
@@ -57,12 +65,12 @@
                                         case "1":
                                         Console.WriteLine("Add Flights");
                                         flightManager.AddFlight();
-                                            break;
+                                        break;
 
                                         case "2":
                                         Console.WriteLine("View All Flight Details");
                                         flightManager.ViewAllFlights();
-                                            break;
+                                        break;
 
                                         case "3":
                                         Console.WriteLine("Search Result");
@@ -91,23 +99,26 @@
                                         default:
                                             Console.WriteLine("Invalid option!");
                                             break;
-                                    }
-                                }
-                            }
+                                    } // End Admin Switch Case
+                                } // End Admin While
+                            } // End Admin If Condition
                             else
                             {
                                 Console.WriteLine("Invalid admin credentials!");
-                            }
+                            } // End Else
 
                             break;
 
-                        // Passenger Signup 
-                        case "2":
+
+                        // Passeneger Work --> Abhay Khosla
+                    // Passenger Signup --> Deep Patel
+
+                    case "2": 
                             passengers.Signup();
                             break;
 
-                        // Passenger Login
-                        case "3":
+                    // Passenger Login --> Deep Patel
+                    case "3":
 
                             Passenger passenger = passengers.Login();
 
@@ -124,12 +135,12 @@
                                     {
                                         case "1":
                                         Console.WriteLine("Available Flights");
-                                            flightManager.ViewAllFlights();
+                                            flightManager.ViewAllFlights(); 
                                             break;
 
                                         case "2":
                                         Console.WriteLine("Result");
-                                        flightManager.SearchFlight();
+                                        flightManager.SearchFlight(); 
                                             break;
 
                                         case "3":
@@ -153,9 +164,9 @@
                                         default:
                                             Console.WriteLine("Invalid option!");
                                             break;
-                                    }
-                                }
-                            }
+                                    } // End Passenger Switch Case
+                                } // End Passenger While
+                            } // End If Condition - Passenger
 
                             break;
 
@@ -167,13 +178,12 @@
                         default:
                             Console.WriteLine("Invalid option!");
                             break;
-                    }
-                   
-                
-                MainMenu:
-                    continue;
-             
-            }
-    }
-    }
-}
+                    } // End Main Switch Case
+
+            // Return to Main Menu
+            MainMenu: continue;
+
+        } // End While
+    } // End Main Method
+  } // End Class Program
+} // End Namespace

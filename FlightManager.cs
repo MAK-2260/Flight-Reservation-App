@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+// Asif Khan
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Text;
@@ -7,16 +10,19 @@ namespace FlightReservation
 {
     internal class FlightManager
     {
+        // List to store all available flights in the system
         public List<Flight> flights = new List<Flight>();
+
+        // List to store all booking records made by passengers
         public List<Booking> bookings = new List<Booking>();
-
-        public int FlightIDCounter = 101;
         
+        // Flight is fixed and generate automatically 
+        public int FlightIDCounter = 101;
 
-        // public List<Passenger> passengers = new List<Passenger>();
-        // Add Flight
+        // Add Flights
         public void AddFlight()
         {
+            // Collect flight details from users and convert data types safely
             try
             {
                 /*Console.Write("Flight ID: ");
@@ -57,11 +63,22 @@ namespace FlightReservation
 
                 Console.WriteLine("Flight added successfully!");
             }
+            // Handle invalid input errors and display this message
             catch
             {
-                Console.WriteLine("Invalid input!");
+                Console.WriteLine("Invalid input! Please enter correct values.");
             }
-        }
+        } //End Add Flight Method
+
+        // Admin View All Flights
+        public void ViewAllFlights()
+        {
+            foreach (Flight flight in flights)
+            {
+                Console.WriteLine($"Flight ID: {flight.FlightId} | Flight No.: {flight.FlightNumber} | {flight.From} to {flight.To} | Price: {flight.Price} | Seats: {flight.Seats} |  Date: {flight.Date} | Time: {flight.Time}\n");
+            }
+
+        } // End View All Flight Method
 
         // Search Flight
         public void SearchFlight()
@@ -79,22 +96,7 @@ namespace FlightReservation
             {
                 Console.WriteLine("Flight not found!");
             }
-        }
-
-        //  View All Booking
-        public void ViewBookings()
-        {
-            if (bookings.Count == 0)
-            {
-                Console.WriteLine("No bookings available.");
-                return;
-            }
-
-            foreach (var b in bookings)
-            {
-                Console.WriteLine($"Booking ID: {b.BookingId} | Flight ID: {b.FlightId} | Flight No.: {b.FlightNumber} | Passenger: {b.PassengerName} | PassportNumber: {b.PassportNumber} | from {b.From} to {b.To} | Price: {b.Price}| Date: {b.Date} | Time: {b.Time}");
-            }
-        }
+        } // End Search Flight Method
 
         // Manage Flight (Update) 
         public void ManageFlight()
@@ -118,13 +120,13 @@ namespace FlightReservation
             {
                 Console.WriteLine("Flight not found!");
             }
-        }
+        } // End Update Flights Method
 
         // Remove Flight
         public void RemoveFlight()
         {
-            Console.WriteLine("Remove an Existing Flight");
-            Console.WriteLine("*************************************");
+            Console.WriteLine("\nRemove an Existing Flight");
+            Console.WriteLine("-----------------------------");
 
             Console.Write("Enter Flight ID to Remove: ");
             int flightIdRemove = Convert.ToInt32(Console.ReadLine());
@@ -144,22 +146,29 @@ namespace FlightReservation
                 Console.WriteLine("Flight not found!");
             }
 
-            Console.WriteLine("Updated Flight List:");
+            Console.WriteLine("\nUpdated Flight List:");
 
             foreach (Flight flight in flights)
             {
                 Console.WriteLine($"Flight ID: {flight.FlightId} | Flight No.: {flight.FlightNumber} | {flight.From} to {flight.To} | Price: {flight.Price} | Seats: {flight.Seats} | Date: {flight.Date} | Time: {flight.Time}");
             }
-        }
+        } // End Remove Method
 
-        public void ViewAllFlights() 
+        //  Admin can View All Passenger Bookings
+        public void ViewBookings()
         {
-            foreach (Flight flight in flights)
+            if (bookings.Count == 0)
             {
-                Console.WriteLine($"Flight ID: {flight.FlightId} | Flight No.: {flight.FlightNumber} | {flight.From} to {flight.To} | Price: {flight.Price} | Seats: {flight.Seats} |  Date: {flight.Date} | Time: {flight.Time}");
+                Console.WriteLine("No bookings available.");
+                return;
             }
 
-        }      
-    }
-}
+            foreach (var b in bookings)
+            {
+                Console.WriteLine($"Booking ID: {b.BookingId} | Flight ID: {b.FlightId} | Flight No.: {b.FlightNumber} | Passenger: {b.PassengerName} | PassportNumber: {b.PassportNumber} | from {b.From} to {b.To} | Price: {b.Price}| Date: {b.Date} | Time: {b.Time}\n");
+            }
+        } // End View All Passenger Bookings Method
+
+    } // End Class FlightManager
+} // End Namespace
 
